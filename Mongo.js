@@ -1,6 +1,6 @@
-# inserting the data inside the DataBase
+// # inserting the data inside the DataBase
 
-db.day2.insertMany({
+db.day1.insertMany(
     [
     {
         "id": "1",
@@ -178,63 +178,63 @@ db.day2.insertMany({
         "product_color": "indigo"
     }
 ]
-})
+)
 
-1)Getting all informations about each products. 
+// 1)Getting all informations about each products. 
 
-         db.day2.find().
+         db.day1.find().
 
-2) Getting the product price which are between 400 to 800
+// 2) Getting the product price which are between 400 to 800
 
-db.day2.find({product_price:{$gt:400, $lt:800}}).pretty() .
+db.day1.find({product_price:{$gt:400, $lt:800}}).pretty() .
 
-3) Getting the product price which are not between 400 to 600
+// 3) Getting the product price which are not between 400 to 600
 
-db.day2.find({product_price:{"$not": {$gt:400,$lt:800 }}}).pretty() .
+db.day1.find({product_price:{"$not": {$gt:400,$lt:800 }}}).pretty() .
 
-4) getting the four product which are grater than 500 in price 
+// 4) getting the four product which are grater than 500 in price 
 
-db.day2.find({product_price:{$gt:500}}).limit(4)
+db.day1.find({product_price:{$gt:500}}).limit(4)
 
-5) Find the product name and product material of each products
+// 5) Find the product name and product material of each products
 
 // With id
-db.day2.find({},{_id:0,id:1,product_name:1,product_material:1})
+db.day1.find({},{_id:0,id:1,product_name:1,product_material:1})
 
 // Without id (But any how it shows the BSON Id)
-db.day2.find({},{product_name:1,product_material:1}).pretty()
+db.day1.find({},{product_name:1,product_material:1}).pretty()
 
-6) Finding the product with the row id of 10
+// 6) Finding the product with the row id of 10
  
- db.day2.find({id:10})
+ db.day1.find({id:10})
 
- 7)Finding only the product name and product material of all data
+//  7)Finding only the product name and product material of all data
 
- db.day2.find({},{product_name:1, product_material:1}).pretty()
+ db.day1.find({},{product_name:1, product_material:1}).pretty()
 
- 8)Finding all products which contain the value of soft in product product_material
+//  8)Finding all products which contain the value of soft in product product_material
 
-Method 1
- db.day2.find({product_material:"Soft"})
+// Method 1
+ db.day1.find({product_material:"Soft"})
 
- Method 2
-  db.day2.aggregate([{$match:{product_material:"Soft"}}])
+//  Method 2
+  db.day1.aggregate([{$match:{product_material:"Soft"}}])
 
-9) Find products which contain product color indigo  and product price 492.00
+// 9) Find products which contain product color indigo  and product price 492.00
 
-(Here we don't have availablity of product_color:"indigo" @ a price of 492, so instead we use plum as product_color)
+// (Here we don't have availablity of product_color:"indigo" @ a price of 492, so instead we use plum as product_color)
 
-  db.day2.find({product_color:"plum",product_price:492}).pretty()
+  db.day1.find({product_color:"plum",product_price:492}).pretty()
 
-10) db.day2.aggregate([
+10) db.day1.aggregate([
   { $group: { _id: "$product_price", count: { $sum: 1 } } },
   { $match: { count: { $gt: 1 } } },
 ]);
-db.day2.remove({ product_price: 36 });
+db.day1.remove({ product_price: 36 });
 
-db.day2.aggregate([
+db.day1.aggregate([
   { $group: { _id: "$product_price", count: { $sum: 1 } } },
   { $match: { count: { $gt: 1 } } },
 ]);
-db.day2.remove({ product_price: 47 });
+db.day1.remove({ product_price: 47 });
 
