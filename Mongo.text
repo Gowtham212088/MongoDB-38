@@ -226,4 +226,15 @@ Method 1
 
   db.day2.find({product_color:"plum",product_price:492}).pretty()
 
-10) 
+10) db.day2.aggregate([
+  { $group: { _id: "$product_price", count: { $sum: 1 } } },
+  { $match: { count: { $gt: 1 } } },
+]);
+db.day2.remove({ product_price: 36 });
+
+db.day2.aggregate([
+  { $group: { _id: "$product_price", count: { $sum: 1 } } },
+  { $match: { count: { $gt: 1 } } },
+]);
+db.day2.remove({ product_price: 47 });
+
